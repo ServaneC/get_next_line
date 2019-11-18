@@ -6,7 +6,7 @@
 /*   By: schene <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 13:34:30 by schene            #+#    #+#             */
-/*   Updated: 2019/11/18 15:53:15 by schene           ###   ########.fr       */
+/*   Updated: 2019/11/18 16:40:07 by schene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,7 @@ int		ft_line(char **mem, char **line, int fd, int ret)
 	{
 		if (ret == BUFFER_SIZE)
 			return (get_next_line(fd, line));
-		if ((*line = ft_strdup(mem[fd])) == NULL)
-			return (-1);
+		*line = ft_strdup(mem[fd]);
 		ft_delstr(&mem[fd]);
 		return (0);
 	}
