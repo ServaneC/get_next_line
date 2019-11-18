@@ -6,7 +6,7 @@
 /*   By: schene <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 11:19:05 by schene            #+#    #+#             */
-/*   Updated: 2019/11/18 11:29:04 by schene           ###   ########.fr       */
+/*   Updated: 2019/11/18 17:35:23 by schene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <unistd.h>
 
 int		ft_strlen(const char *s);
-void	ft_delstr(char **str);
+int		ft_delstr(char **mem, int ret, int fd);
 char	*ft_strchr(const char *s, int c);
 char	*ft_newstr(int size);
 char	*ft_strjoin(char const *s1, char const *s2);
