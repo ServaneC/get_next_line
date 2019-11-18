@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_test.c                               :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: schene <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/24 09:32:49 by schene            #+#    #+#             */
-/*   Updated: 2019/11/17 16:45:22 by schene           ###   ########.fr       */
+/*   Created: 2019/11/18 16:41:19 by schene            #+#    #+#             */
+/*   Updated: 2019/11/18 16:41:49 by schene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
 int		ft_strlen(const char *s)
 {
@@ -54,8 +54,9 @@ int		ft_line(char **mem, char **line, int fd, int ret)
 		len++;
 	if (mem[fd][len] == '\n')
 	{
-		*line = ft_substr(mem[fd], 0, len);
-		tmp = ft_strdup(&mem[fd][len + 1]);
+		if ((*line = ft_substr(mem[fd], 0, len)) == NULL ||
+				(tmp = ft_strdup(&mem[fd][len + 1])) == NULL)
+			return (-1);
 		ft_delstr(&mem[fd]);
 		mem[fd] = tmp;
 		if (mem[fd][0] == '\0')
@@ -79,17 +80,17 @@ int		get_next_line(int fd, char **line)
 	char		*tmp;
 	int			ret;
 
-	if (fd < 0 || BUFFER_SIZE < 1)
-		return (-1);
 	buf = NULL;
-	if (!(buf = malloc(sizeof(char) * BUFFER_SIZE + 1)))
+	if (fd < 0 || BUFFER_SIZE < 1 ||
+			!(buf = malloc(sizeof(char) * BUFFER_SIZE + 1)))
 		return (-1);
 	while ((ret = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		buf[ret] = '\0';
 		if (mem[fd] == NULL)
 			mem[fd] = ft_newstr(1);
-		tmp = ft_strjoin(mem[fd], buf);
+		if ((tmp = ft_strjoin(mem[fd], buf)) == NULL)
+			return (-1);
 		free(mem[fd]);
 		mem[fd] = tmp;
 		if (ft_strchr(mem[fd], '\n'))
