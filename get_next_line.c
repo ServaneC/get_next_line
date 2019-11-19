@@ -6,7 +6,7 @@
 /*   By: schene <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 13:34:30 by schene            #+#    #+#             */
-/*   Updated: 2019/11/18 17:35:35 by schene           ###   ########.fr       */
+/*   Updated: 2019/11/19 14:18:25 by schene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		ft_strlen(const char *s)
 	return (i);
 }
 
-int		ft_delstr(char **mem, int ret, int fd)
+int		ft_delstr(char **mem, int ret, int fd, char **line)
 {
 	if (mem[fd] || ret < 0)
 	{
@@ -32,6 +32,8 @@ int		ft_delstr(char **mem, int ret, int fd)
 		mem[fd] = NULL;
 		return (-1);
 	}
+	*line = ft_strdup("\0");
+	free(mem[fd]);
 	return (0);
 }
 
@@ -56,10 +58,10 @@ int		ft_line(char **mem, char **line, int fd, int ret)
 		if ((*line = ft_substr(mem[fd], 0, len)) == NULL ||
 				(tmp = ft_strdup(&mem[fd][len + 1])) == NULL)
 			return (-1);
-		ft_delstr(mem, ret, fd);
+		free(mem[fd]);
 		mem[fd] = tmp;
 		if (mem[fd][0] == '\0')
-			ft_delstr(mem, ret, fd);
+			ft_delstr(mem, ret, fd, line);
 	}
 	else if (mem[fd][len] == '\0')
 	{
@@ -67,7 +69,7 @@ int		ft_line(char **mem, char **line, int fd, int ret)
 			return (get_next_line(fd, line));
 		if ((*line = ft_strdup(mem[fd])) == NULL)
 			return (-1);
-		ft_delstr(mem, ret, fd);
+		ft_delstr(mem, ret, fd, line);
 		return (0);
 	}
 	return (1);
@@ -98,6 +100,6 @@ int		get_next_line(int fd, char **line)
 	}
 	free(buf);
 	if (ret < 0 || (ret == 0 && (mem[fd] == NULL || mem[fd][0] == '\0')))
-		return (ft_delstr(mem, ret, fd));
+		return (ft_delstr(mem, ret, fd, line));
 	return (ft_line(mem, line, fd, ret));
 }
