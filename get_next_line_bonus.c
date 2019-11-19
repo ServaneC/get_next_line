@@ -6,11 +6,11 @@
 /*   By: schene <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:52:34 by schene            #+#    #+#             */
-/*   Updated: 2019/11/19 14:18:59 by schene           ###   ########.fr       */
+/*   Updated: 2019/11/19 14:32:12 by schene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int		ft_strlen(const char *s)
 {
