@@ -6,7 +6,7 @@
 /*   By: schene <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:52:34 by schene            #+#    #+#             */
-/*   Updated: 2019/11/19 14:32:12 by schene           ###   ########.fr       */
+/*   Updated: 2019/11/19 14:43:01 by schene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int		ft_line(char **mem, char **line, int fd, int ret)
 
 int		get_next_line(int fd, char **line)
 {
-	static char	*mem[255];
+	static char	*mem[2147483647];
 	char		*buf;
 	char		*tmp;
 	int			ret;
